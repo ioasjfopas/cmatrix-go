@@ -28,3 +28,18 @@ go build
 # run
 ./gomatrix
 ```
+
+### Install
+
+> Note that you need to have the `GOPATH` added to your `PATH` variable for this to work.
+
+```sh
+# install dependencies
+go mod tidy
+
+# build
+go build
+
+# install
+go install
+```
