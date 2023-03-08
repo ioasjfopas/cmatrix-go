@@ -14,6 +14,11 @@ import (
 
 const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+"
 
+func getRandomChar() rune {
+	randIndex := rand.Intn(len(chars))
+	return rune(chars[randIndex])
+}
+
 type Cell struct {
 	char        rune
 	highlighted bool
@@ -34,9 +39,7 @@ func (m *Matrix) init() {
 
 		var column []Cell
 		for j := 0; j < m.height; j++ {
-			randIndex := rand.Intn(len(chars))
-			char := rune(chars[randIndex])
-			cell := Cell{char: char, highlighted: false}
+			cell := Cell{char: getRandomChar(), highlighted: false}
 
 			column = append(column, cell)
 		}
@@ -92,6 +95,9 @@ func (m *Matrix) draw() {
 				color.Set(color.FgHiGreen)
 			} else {
 				color.Set(color.FgBlack)
+
+				// change the character, so it looks different after being highlighted again
+				m.columns[c/2][r].char = getRandomChar()
 			}
 
 			fmt.Printf("%c", cell.char)
