@@ -107,9 +107,10 @@ func (m *Matrix) draw() {
 
 func catchInterrupt() {
 	c := make(chan os.Signal, 1)
-	signal.Notify(c, os.Interrupt)
+	signal.Notify(c, os.Interrupt, os.Kill)
 	go func() {
 		<-c
+		screen.Clear()
 		cursor.Show()
 		screen.Clear()
 		os.Exit(0)
